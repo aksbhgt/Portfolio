@@ -68,3 +68,12 @@ function showErr(t) {
   msg.textContent = t;
   msg.classList.add('err');
 }
+// Project card flip
+
+const projectCards = document.querySelectorAll('.project-card');
+
+projectCards.forEach((card) => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('flipped');
+  });
+});
