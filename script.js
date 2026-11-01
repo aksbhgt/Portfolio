@@ -77,3 +77,36 @@ projectCards.forEach((card) => {
     card.classList.toggle('flipped');
   });
 });
+// Certificate lightbox
+const lightbox = document.getElementById('cert-lightbox');
+const lightboxImg = document.getElementById('cert-lightbox-img');
+const lightboxClose = document.getElementById('cert-close');
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.certificate-card').forEach((card) => {
+  card.addEventListener('click', () => {
+    const img = card.querySelector('.certificate-img');
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // stops page scrolling behind it
+  });
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+// Click on the dark background closes it too
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+// Esc key closes it
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
